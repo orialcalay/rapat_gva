@@ -1,0 +1,176 @@
+#include "LDM_Common.idl"
+
+
+//1. Every video stream has identifier.
+//2. 
+module P_Video_PSM
+{
+	enum T_Video_Stream_IndexType
+	{
+		L_Very_Narrow,
+		L_Narrow_Medium,
+		L_Narrow_Wide,
+		L_Very_Wide
+	};
+	enum T_Boresight_StateType
+	{
+
+	};
+	enum T_Gain_StateType
+	{
+		L_Gain_StateType_AUTO_ON,
+		L_Gain_StateType_AUTO_OFF
+	};
+	enum T_Black_Level_StateType
+	{
+		L_Black_Level_StateType_AUTO_ON,
+		L_Black_Level_StateType_AUTO_OFF
+	};
+
+	struct C_Video_Source_Specification//video providers - noga, leshem
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		sequence <P_LDM_Common::T_IdentifierType> A_providedVideoStream;
+	};
+	struct C_Video_Stream_Specification//video channels - day, night, swir
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;
+		P_LDM_Common::T_IdentifierType A_videoSourceID;
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		P_LDM_Common::T_Boolean A_zoomSupported;
+		P_LDM_Common::T_Boolean A_focusSupported;
+		P_LDM_Common::T_Boolean A_gainSupported;
+		P_LDM_Common::T_Boolean A_levelSupported;
+		P_LDM_Common::T_Boolean A_fovSupported;
+		P_LDM_Common::T_Boolean A_polaritySupported;
+		P_LDM_Common::T_Boolean A_emphasisSupported;
+	};
+	struct C_FOV
+	{
+
+	};
+	struct C_FOV_setFOV
+	{
+	
+	};
+	struct C_Focus
+	{
+		P_LDM_Common::T_IdentifierType A_videoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		T_Focus_StateType A_focusStatus;
+	};
+	
+	struct C_Polarity
+	{
+		P_LDM_Common::T_IdentifierType A_videoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		T_Polarity_StateType A_videoPolarityStatus;
+	};
+
+	struct C_Polarity_invertPolarity
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+
+	struct C_Video_Stream_Black_Level_Support
+	{
+		P_LDM_Common::T_IdentifierType A_videoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		P_LDM_Common::T_Double A_maximumBlackLevelValue;
+		P_LDM_Common::T_Double A_minimunBlackLevelValue;
+	};
+
+	struct C_Black_Level_setAutoOn
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientVideoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+
+	struct C_Black_Level_setAutoOff
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientVideoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+
+	struct C_Black_Level_setBlackLevelAbsolute
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientVideoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		P_LDM_Common::T_Double A_blackLevelAbsolute;
+	}
+
+	struct C_Black_Level
+	{
+		P_LDM_Common::T_IdentifierType A_videoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		T_Black_Level_StateType A_blackLevelState;
+		P_LDM_Common::T_Double A_blackLevelAbsolute;
+	};
+
+	struct C_Video_Stream_Gain_Support
+	{
+		P_LDM_Common::T_IdentifierType A_videoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		P_LDM_Common::T_Double A_maximumGainValue;
+		P_LDM_Common::T_Double A_minimunGainValue;
+	};
+
+	struct C_Gain_setAutoOn
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientVideoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+
+	struct C_Gain_setAutoOff
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientVideoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+
+	struct C_Gain_setGainAbsolute
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientVideoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		P_LDM_Common::T_Double A_gainAbsolute;
+	}
+
+	struct C_Gain
+	{
+		P_LDM_Common::T_IdentifierType A_videoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		T_Gain_StateType A_gainState;
+		P_LDM_Common::T_Double A_gainAbsolute;
+	};
+
+	//boresight topics
+	//
+	struct C_Boresight
+	{
+		P_LDM_Common::T_IdentifierType A_videoStreamID;//@key
+		T_Video_Stream_IndexType A_videoStreamIndex;//@key
+		P_LDM_Common::UInt16 A_boresightXAxis;
+		P_LDM_Common::UInt16 A_boresightYAxis;
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+	struct C_Boresight_Status
+	{
+		P_LDM_Common::T_IdentifierType A_videoStreamID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		T_Boresight_StateType A_boresightStatus;
+	};
+	struct C_Boresight_startBoresight
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+};

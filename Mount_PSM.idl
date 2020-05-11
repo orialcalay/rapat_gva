@@ -1,0 +1,21 @@
+#include "LDM_Common.idl"
+
+
+module P_Mount_PSM
+{
+	struct C_Rotational_Mount_setPositionRelatively
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		P_LDM_Common::T_CoordinatePolar3DType A_relativePosition;
+	};
+
+	struct C_Rotational_Mount_setPosition 
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		P_LDM_Common::T_Coordinate3DType A_position;
+	};
+}

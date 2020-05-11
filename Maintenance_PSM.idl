@@ -1,0 +1,67 @@
+#include "LDM_Common.idl" 
+
+
+module P_Maintenance_PSM
+{
+	typedef P_LDM_Common::UInt16 T_ErrorID;
+
+	enum T_CompanyCodesType
+	{
+    
+	};
+	enum T_ProjectCodesType
+	{
+
+	};
+	enum T_Error_StateType
+	{
+		L_ERR_EXISTS,
+    	L_ERR_VANISHED,
+    	L_ERR_REPEATED,
+    	L_ERR_NOT_EXISTS
+	};
+	struct T_ErrorType
+	{
+		T_ErrorID A_errorID;
+		T_Error_StateType A_errorStatus;
+	};
+
+	struct C_Maintenance
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;
+    	P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+    	P_LDM_Common::T_DateTimeType A_creationDate;
+    	P_LDM_Common::T_DateTimeType A_restorationDate;
+    	P_LDM_Common::T_DateTimeType A_softwareUpdateDate;
+    	P_LDM_Common::T_DateTimeType A_hardwareUpdateDate;
+    	P_LDM_Common::T_CompanyCodeType A_companyCode;
+    	P_LDM_Common::T_CompanyCodeType A_restorerCode;
+    	P_LDM_Common::T_ProjectCodesType A_projectCode;
+    	P_LDM_Common::T_DurationType A_totalOpTime;
+    	P_LDM_Common::T_VersionType A_softwareVersion;
+    	P_LDM_Common::T_VersionType A_hardwareVersion;
+    	P_LDM_Common::T_VeryShortString A_catalogCode;
+    	P_LDM_Common::T_VeryShortString A_serialNumber;
+	};
+
+	struct C_Error_Report
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		sequence <T_ErrorType> A_errorSequence;
+	};
+
+	struct C_requestIBit
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;	
+	};
+
+	struct C_setTime
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		P_LDM_Common::T_DateTimeType A_time;
+	};
+}

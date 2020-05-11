@@ -1,0 +1,48 @@
+#include "LDM_Common.idl"
+
+
+module P_LRF_PSM
+{
+	enum T_LRF_StateType
+	{
+		L_LRF_StateType_SinglePulseMode,
+		L_LRF_StateType_MultiPulseMode,	
+		L_LRF_StateType_HighSpeedMode
+	};
+
+	enum T_FirstOrLastType
+	{
+		L_FirstOrLastType_FIRST,
+		L_FirstOrLastType_LAST
+	};
+
+	struct C_LRF_singleFireLaser
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+
+	struct C_LRF_multiFireLaser
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_recipientID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+	};
+
+	struct C_LRF
+	{
+		P_LDM_Common::T_IdentifierType A_sourceID;//@key
+		P_LDM_Common::T_IdentifierType A_eventID;//@key
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		T_LRF_StateType A_lrfState;
+	};
+
+	struct C_LRF_Measurement
+	{
+		P_LDM_Common::T_IdentifierType A_eventID;
+		P_LDM_Common::T_DateTimeType A_timeOfDataGeneration;
+		T_FirstOrLastType A_firstOrLast;
+		P_LDM_Common::T_DistanceInMetresType A_range;
+	};
+}
